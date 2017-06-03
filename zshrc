@@ -6,9 +6,10 @@ zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 
-
 zplug "hevi9/infoline-zsh-theme", as:theme
 
-zplug "~/.zsh", from:local
-
 zplug load
+
+for file in ~/.zshscripts/*; do
+  source $file
+done
