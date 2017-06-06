@@ -3,7 +3,6 @@ filetype plugin indent on
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'itchyny/lightline.vim'
-Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'mhinz/vim-signify'
@@ -11,8 +10,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {'ft': 'rust'}
 Plug 'vim-syntastic/syntastic'
+Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 
@@ -28,6 +28,11 @@ set lazyredraw
 
 set cursorline
 set number
+set so=10 " Keep N lines visible in window
+set colorcolumn=80
+set showmatch
+
+set wildmenu
 
 set list                   " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -46,7 +51,7 @@ set hidden
 " Keymaps
 let mapleader = ' '
 
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <silent> <leader>c :nohl<CR><C-l>
 map <C-n> :NERDTreeToggle<CR>
 
 map <C-j> <C-W>j
@@ -55,6 +60,8 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Files
+set autoread
+
 set backup
 set backupdir =$HOME/.config/nvim/files/backup/
 set backupext =-vimback
@@ -86,6 +93,10 @@ let g:lightline = {
 " Plugins/Deoplete
 let g:deoplete#enable_at_startup = 1
 
+" Plugins/delimitMate
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+
 " Plugins/NerdTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeWinPos = "right"
@@ -107,6 +118,7 @@ set wrapscan
 
 " Tabbing
 set autoindent
+set smarttab
 set expandtab
 set softtabstop =2
 set shiftwidth =2
