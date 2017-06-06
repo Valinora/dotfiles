@@ -1,0 +1,12 @@
+{
+  "link": {
+    "zshrc": "~/.zshrc",
+    "zplug": "~/.zplug",
+    "Xresources": "~/.Xresources",
+    "Xresources.d": "~/.Xresources.d",
+    "config/i3": "~/.config/i3",
+    "config/nvim": "~/.config/nvim",
+    "config/termite": "~/.config/termite",
+    "config/user-dirs.dirs": "~/.config/user-dirs.dirs"
+  }
+}
