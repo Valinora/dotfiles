@@ -5,6 +5,11 @@ zplug "zplug/zplug", hook-build:"zplug --self-manage"
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-completions"
+
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+
 
 zplug "hevi9/infoline-zsh-theme", as:theme
 
@@ -147,4 +152,4 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # Environment
-export EDITOR="vim"
+export EDITOR="nvim"
