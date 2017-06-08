@@ -73,6 +73,7 @@ set undodir =$HOME/.config/nvim/files/undo/
 set viminfo ='100,n$HOME/.config/nvim/files/info/nviminfo " Unkown sourcery.
 
 " Misc
+set mouse=n
 set backspace =indent,eol,start
 autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") |
