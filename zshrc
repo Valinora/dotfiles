@@ -1,3 +1,6 @@
+# Plugin Variables
+zpacman_frontend='pacaur'
+
 source ~/.zplug/init.zsh
 
 zplug "zdharma/fast-syntax-highlighting", defer:2
@@ -7,6 +10,9 @@ zplug "zsh-users/zsh-completions"
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
+
+zplug "Eriner/zim", use:"modules/pacman/*.zsh"
+zplug "Eriner/zim", use:"modules/utility/*.zsh"
 
 
 zplug "hevi9/infoline-zsh-theme", as:theme
@@ -151,3 +157,6 @@ SAVEHIST=10000
 
 # Environment
 export EDITOR="nvim"
+
+# Custom Aliases
+alias vim=nvim
