@@ -14,6 +14,7 @@ zplug "plugins/sudo", from:oh-my-zsh
 zplug "Eriner/zim", use:"modules/pacman/*.zsh"
 zplug "Eriner/zim", use:"modules/utility/*.zsh"
 
+zplug "~/.zscripts", from:local
 
 zplug "hevi9/infoline-zsh-theme", as:theme
 
@@ -154,9 +155,6 @@ HISTFILE=~/.zhistory
 # limit of history entries
 HISTSIZE=10000
 SAVEHIST=10000
-
-# Environment
-export EDITOR="nvim"
 
 # Custom Aliases
 alias vim=nvim
