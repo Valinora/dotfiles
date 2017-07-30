@@ -31,6 +31,7 @@ set number
 set so=10 " Keep N lines visible in window
 set colorcolumn=80
 set showmatch
+set nowrap
 
 set wildmenu
 
