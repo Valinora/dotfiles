@@ -1,24 +1,24 @@
 # Plugin Variables
 zpacman_frontend='pacaur'
 
-source ~/.zplug/init.zsh
+source ~/.antigen/antigen.zsh
 
-zplug "zdharma/fast-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-completions"
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle sudo
 
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/sudo", from:oh-my-zsh
+antigen bundle zdharma-continuum/fast-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-completions
 
-zplug "Eriner/zim", use:"modules/pacman/*.zsh"
-zplug "Eriner/zim", use:"modules/utility/*.zsh"
+antigen bundle $HOME/.zscripts
 
-zplug "~/.zscripts", from:local
+antigen theme hevi9/infoline-zsh-theme infoline
 
-zplug "hevi9/infoline-zsh-theme", as:theme
-
-zplug load
+antigen apply
+#zplug "Eriner/zim", use:"modules/pacman/*.zsh"
+#zplug "Eriner/zim", use:"modules/utility/*.zsh"
 
 #
 # zsh options

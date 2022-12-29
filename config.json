@@ -1,8 +1,8 @@
 {
   "link": {
     "zshrc": "~/.zshrc",
-    "zplug": "~/.zplug",
     "zscripts": "~/.zscripts",
+    "antigen": "~/.antigen",
     "config/sway": "~/.config/sway",
     "config/waybar": "~/.config/waybar",
     "config/nvim": "~/.config/nvim",
