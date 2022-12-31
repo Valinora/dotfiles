@@ -1,6 +1,3 @@
 [submodule "dotty"]
 	path = dotty
 	url = https://github.com/vibhavp/dotty
-[submodule "antigen"]
-	path = antigen
-	url = https://github.com/zsh-users/antigen.git

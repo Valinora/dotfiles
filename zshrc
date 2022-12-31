@@ -1,22 +1,30 @@
 # Plugin Variables
 zpacman_frontend='pacaur'
+ZIM_HOME=~/etc/zim
+# Install missing modules
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
 
-source ~/.antigen/antigen.zsh
+source ${ZIM_HOME}/init.zsh
+source ${HOME}/.zscripts/env.zsh
 
-antigen use oh-my-zsh
-antigen bundle git
-antigen bundle sudo
+#source ~/.antigen/antigen.zsh
 
-antigen bundle zdharma-continuum/fast-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-completions
+#antigen use oh-my-zsh
+#antigen bundle git
+#antigen bundle sudo
 
-antigen bundle $HOME/.zscripts
+#antigen bundle zdharma-continuum/fast-syntax-highlighting
+#antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle zsh-users/zsh-history-substring-search
+#antigen bundle zsh-users/zsh-completions
 
-antigen theme hevi9/infoline-zsh-theme infoline
+#antigen bundle $HOME/.zscripts
 
-antigen apply
+#antigen theme hevi9/infoline-zsh-theme infoline
+
+#antigen apply
 #zplug "Eriner/zim", use:"modules/pacman/*.zsh"
 #zplug "Eriner/zim", use:"modules/utility/*.zsh"
 

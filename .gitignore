@@ -3,4 +3,7 @@ config/nvim/files/backup/*
 config/nvim/files/swap
 config/nvim/files/info
 config/nvim/plugged
-zplug/repos
+zim/init.*
+zim/login_init.*
+zim/.latest_version
+zim/modules

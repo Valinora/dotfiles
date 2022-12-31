@@ -2,7 +2,8 @@
   "link": {
     "zshrc": "~/.zshrc",
     "zscripts": "~/.zscripts",
-    "antigen": "~/.antigen",
+    "zim": "~/.zim",
+    "zimrc": "~/.zimrc",
     "config/sway": "~/.config/sway",
     "config/waybar": "~/.config/waybar",
     "config/nvim": "~/.config/nvim",
