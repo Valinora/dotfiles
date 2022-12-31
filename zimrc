@@ -3,4 +3,8 @@ zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-history-substring-search
 zmodule zsh-users/zsh-completions
 
+zmodule utility
+zmodule git
+zmodule completion
+
 zmodule hevi9/infoline-zsh-theme --name infoline

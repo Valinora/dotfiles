@@ -6,27 +6,13 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 
+zstyle ':zim:git' aliases-prefix 'g'
+
 source ${ZIM_HOME}/init.zsh
 source ${HOME}/.zscripts/env.zsh
 
-#source ~/.antigen/antigen.zsh
-
-#antigen use oh-my-zsh
 #antigen bundle git
 #antigen bundle sudo
-
-#antigen bundle zdharma-continuum/fast-syntax-highlighting
-#antigen bundle zsh-users/zsh-autosuggestions
-#antigen bundle zsh-users/zsh-history-substring-search
-#antigen bundle zsh-users/zsh-completions
-
-#antigen bundle $HOME/.zscripts
-
-#antigen theme hevi9/infoline-zsh-theme infoline
-
-#antigen apply
-#zplug "Eriner/zim", use:"modules/pacman/*.zsh"
-#zplug "Eriner/zim", use:"modules/utility/*.zsh"
 
 #
 # zsh options
