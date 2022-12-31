@@ -9,9 +9,7 @@ Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Raimondi/delimitMate'
-Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim', {'ft': 'rust'}
-" Plug 'vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'jlanzarotta/bufexplorer'
