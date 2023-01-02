@@ -7,4 +7,4 @@ zmodule utility
 zmodule git
 zmodule completion
 
-zmodule hevi9/infoline-zsh-theme --name infoline
+zmodule joke/zim-starship
