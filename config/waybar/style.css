@@ -87,6 +87,8 @@ button:hover {
 #mode,
 #idle_inhibitor,
 #scratchpad,
+#battery,
+#keyboard-state,
 #mpd {
     padding: 0 10px;
     color: #ffffff;
@@ -112,8 +114,7 @@ button:hover {
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #64727D;
 }
 
 #battery.charging, #battery.plugged {
@@ -143,24 +144,23 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: #64727D;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: #64727D;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #64727D;
 }
 
 #backlight {
-    background-color: #90b1b1;
+    background-color: #64727D;
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: #64727D;
 }
 
 #network.disconnected {
@@ -168,13 +168,13 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
+    background-color: #64727D;
     color: #000000;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    background-color: #64727D;
+    color: #f53c3c;
 }
 
 #wireplumber {
@@ -201,7 +201,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #64727D;
 }
 
 #temperature.critical {
@@ -256,8 +256,7 @@ label:focus {
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
+    background: #64727D;
     padding: 0 0px;
     margin: 0 5px;
     min-width: 16px;
