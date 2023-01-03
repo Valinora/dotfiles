@@ -3,6 +3,8 @@ config/nvim/files/backup/*
 config/nvim/files/swap
 config/nvim/files/info
 config/nvim/plugged
+config/coc/extensions/*
+!config/coc/extensions/package.json
 zim/init.*
 zim/login_init.*
 zim/.latest_version

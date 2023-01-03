@@ -5,6 +5,7 @@
     "zim": "~/.zim",
     "zimrc": "~/.zimrc",
     "config/sway": "~/.config/sway",
+    "config/coc": "~/.config/coc",
     "config/waybar": "~/.config/waybar",
     "config/nvim": "~/.config/nvim",
     "config/termite": "~/.config/termite",

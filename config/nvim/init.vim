@@ -4,7 +4,8 @@ filetype plugin indent on
 call plug#begin('~/.config/nvim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim', { 'branch': 'main' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-css-color'
 Plug 'scrooloose/nerdtree'
@@ -93,8 +94,16 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ }
 
-" Plugins/Deoplete
-let g:deoplete#enable_at_startup = 1
+" Plugins/coc.vim
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 " Plugins/delimitMate
 let g:delimitMate_expand_cr = 1
