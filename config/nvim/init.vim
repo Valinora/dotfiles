@@ -18,6 +18,8 @@ Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 
+" Performance
+set updatetime=300
 
 " Appearance
 set termguicolors
@@ -34,6 +36,8 @@ set so=10 " Keep N lines visible in window
 set colorcolumn=80
 set showmatch
 set nowrap
+
+set signcolumn=yes
 
 set wildmenu
 
@@ -118,6 +122,11 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Plugins/delimitMate
 let g:delimitMate_expand_cr = 1
