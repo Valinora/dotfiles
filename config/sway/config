@@ -156,6 +156,9 @@ bindsym XF86AudioMicMute      exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
+# Screenshot
+bindsym Mod4+Shift+c exec grim -g "$(slurp -d)" - | wl-copy -t image/png
+
 seat seat0 xcursor_theme Numix-Cursor 32
 
 # Start i3bar to display a workspace bar (plus the system information i3status
