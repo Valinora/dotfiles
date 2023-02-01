@@ -97,7 +97,7 @@ zstyle ':completion:*' squeeze-slashes true
 
 # enable caching
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ".zcompcache"
+zstyle ':completion::complete:*' cache-path "~/.zcompcache"
 
 # ignore useless commands and functions
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|prompt_*)'
@@ -149,6 +149,3 @@ HISTFILE=~/.zhistory
 # limit of history entries
 HISTSIZE=10000
 SAVEHIST=10000
-
-# Custom Aliases
-alias vim=nvim
