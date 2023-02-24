@@ -6,6 +6,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-css-color'
 Plug 'scrooloose/nerdtree'
