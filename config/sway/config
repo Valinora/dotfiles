@@ -157,7 +157,7 @@ bindsym XF86AudioRaiseVolume  exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume  exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Screenshot
-bindsym Mod4+Shift+c exec grim -g "$(slurp -d)" - | wl-copy -t image/png
+bindsym Mod4+Shift+s exec grim -g "$(slurp -d)" - | wl-copy -t image/png
 
 seat seat0 xcursor_theme Numix-Cursor 32
 
