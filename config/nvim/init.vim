@@ -17,11 +17,12 @@ Plug 'fannheyward/coc-rust-analyzer', { 'do' : 'yarn install --frozen-lockfile' 
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-css-color'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'preservim/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'Raimondi/delimitMate'
 Plug 'rust-lang/rust.vim', {'ft': 'rust'}
-Plug 'dense-analysis/ale'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
@@ -68,7 +69,6 @@ set hidden
 let mapleader = ' '
 
 nnoremap <silent> <leader>c :nohl<CR><C-l>
-map <C-n> :NERDTreeToggle<CR>
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -97,6 +97,18 @@ autocmd BufReadPost *
       \ endif
 
 " Plugins
+" Plugins/NvimTree
+lua << EOF
+require("nvim-tree").setup({
+view = {
+  side = "right"
+  }
+})
+EOF
+
+map <C-n> :NvimTreeToggle<CR>
+"map <C-n> :NERDTreeToggle<CR>
+
 " Plugins/Lightline
 set noshowmode
 set laststatus =2
@@ -105,6 +117,13 @@ let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'separator': { 'left': '', 'right': '' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+          \ 'cocstatus': 'coc#status'
+          \ },
       \ }
 
 " Plugins/coc.vim
@@ -132,10 +151,23 @@ function! ShowDocumentation()
   endif
 endfunction
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> <leader>rn <Plug>(coc-rename)
+
+xmap <silent> <leader>f <Plug>(coc-format-selected)
+nmap <silent> <leader>f <Plug>(coc-format)
+
+xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
+
+nmap <silent> <leader>cl <Plug>(coc-codelens-action)
 
 " Plugins/delimitMate
 let g:delimitMate_expand_cr = 1
