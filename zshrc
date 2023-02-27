@@ -1,5 +1,4 @@
 # Plugin Variables
-zpacman_frontend='pacaur'
 ZIM_HOME=~/etc/zim
 # Install missing modules
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
@@ -7,6 +6,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 zstyle ':zim:git' aliases-prefix 'g'
+zstyle ':zim:pacman' frontend 'pikaur'
 
 source ${ZIM_HOME}/init.zsh
 source ${HOME}/.zscripts/env.zsh

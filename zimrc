@@ -6,5 +6,6 @@ zmodule zsh-users/zsh-completions
 zmodule utility
 zmodule git
 zmodule completion
+zmodule pacman
 
 zmodule joke/zim-starship
