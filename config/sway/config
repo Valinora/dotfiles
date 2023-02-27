@@ -166,7 +166,7 @@ seat seat0 xcursor_theme Numix-Cursor 32
 exec waybar
 
 # Notification Daemon
-exec swaync
+exec dunst
 
 default_border pixel 3
 gaps inner 6
