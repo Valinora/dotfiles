@@ -5,7 +5,15 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim', { 'branch': 'main' }
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc-css', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-html', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-tsserver', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'clangd/coc-clangd', { 'do' : 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-rust-analyzer', { 'do' : 'yarn install --frozen-lockfile' }
+
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-css-color'
