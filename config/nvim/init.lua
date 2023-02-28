@@ -1,9 +1,10 @@
-set nocompatible
+vim.cmd([[set nocompatible
 filetype plugin indent on
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim', { 'branch': 'main' }
+Plug 'navarasu/onedark.nvim',
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -15,7 +16,8 @@ Plug 'clangd/coc-clangd', { 'do' : 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do' : 'yarn install --frozen-lockfile' }
 
 Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'ap/vim-css-color'
 " Plug 'preservim/nerdtree'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -28,6 +30,10 @@ Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 
+lua require('onedark').setup()
+lua require('gitsigns').setup()
+
+
 " Performance
 set updatetime=300
 
@@ -35,7 +41,7 @@ set updatetime=300
 set termguicolors
 set background=dark
 let g:onedark_terminal_italics = 1
-color onedark
+colorscheme onedark
 
 set ttyfast
 set lazyredraw
@@ -107,7 +113,7 @@ view = {
 EOF
 
 map <C-n> :NvimTreeToggle<CR>
-"map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 
 " Plugins/Lightline
 set noshowmode
@@ -151,7 +157,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -189,3 +195,4 @@ set expandtab
 set softtabstop =2
 set shiftwidth =2
 set shiftround
+]])
