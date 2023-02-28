@@ -1,38 +1,53 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+local coc_opts = 'yarn install --frozen-lockfile'
+
+require('lazy').setup({
+ --'itchyny/lightline.vim',
+ 'nvim-lualine/lualine.nvim',
+ 'navarasu/onedark.nvim',
+
+ {'neoclide/coc.nvim',  branch = 'release' },
+ {'neoclide/coc-css',  build = coc_opts },
+ {'neoclide/coc-html',  build = coc_opts },
+ {'neoclide/coc-json',  build = coc_opts },
+ {'neoclide/coc-tsserver',  build = coc_opts },
+ {'clangd/coc-clangd',  build = coc_opts },
+ {'fannheyward/coc-rust-analyzer',  build = coc_opts },
+ {'josa42/coc-lua',  build = coc_opts},
+
+ 'mattn/emmet-vim',
+ 'lewis6991/gitsigns.nvim',
+ 'ap/vim-css-color',
+ 'nvim-tree/nvim-web-devicons',
+ 'nvim-tree/nvim-tree.lua',
+ 'Raimondi/delimitMate',
+ {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+ 'jlanzarotta/bufexplorer',
+
+})
+
+require('onedark').setup()
+require('gitsigns').setup()
+require('lualine').setup({
+  options = {
+    theme = 'onedark'
+  }
+})
+
 vim.cmd([[set nocompatible
 filetype plugin indent on
-
-call plug#begin('~/.config/nvim/plugged')
-Plug 'itchyny/lightline.vim'
-Plug 'joshdick/onedark.vim', { 'branch': 'main' }
-Plug 'navarasu/onedark.nvim',
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neoclide/coc-css', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-html', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-tsserver', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'clangd/coc-clangd', { 'do' : 'yarn install --frozen-lockfile' }
-Plug 'fannheyward/coc-rust-analyzer', { 'do' : 'yarn install --frozen-lockfile' }
-
-Plug 'mattn/emmet-vim'
-" Plug 'mhinz/vim-signify'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'ap/vim-css-color'
-" Plug 'preservim/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'Raimondi/delimitMate'
-Plug 'rust-lang/rust.vim', {'ft': 'rust'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
-Plug 'jlanzarotta/bufexplorer'
-call plug#end()
-
-
-lua require('onedark').setup()
-lua require('gitsigns').setup()
-
 
 " Performance
 set updatetime=300
