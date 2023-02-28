@@ -11,38 +11,117 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local coc_opts = 'yarn install --frozen-lockfile'
+local function coc_deps(repo, ft)
+  return {
+    repo,
+    build = 'yarn install --frozen-lockfile',
+    ft = ft,
+  }
+end
 
 require('lazy').setup({
- --'itchyny/lightline.vim',
- 'nvim-lualine/lualine.nvim',
- 'navarasu/onedark.nvim',
+  --'itchyny/lightline.vim',
+  'nvim-lualine/lualine.nvim',
+  'navarasu/onedark.nvim',
 
- {'neoclide/coc.nvim',  branch = 'release' },
- {'neoclide/coc-css',  build = coc_opts },
- {'neoclide/coc-html',  build = coc_opts },
- {'neoclide/coc-json',  build = coc_opts },
- {'neoclide/coc-tsserver',  build = coc_opts },
- {'clangd/coc-clangd',  build = coc_opts },
- {'fannheyward/coc-rust-analyzer',  build = coc_opts },
- {'josa42/coc-lua',  build = coc_opts},
+  --[[
+  'neovim/nvim-lspconfig',
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'saadparwaiz1/cmp_luasnip',
+    },
+    opts = function()
+      local cmp = require('cmp')
+      return {
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "path" },
+        })
+      }
+    end
+  },
 
- 'mattn/emmet-vim',
- 'lewis6991/gitsigns.nvim',
- 'ap/vim-css-color',
- 'nvim-tree/nvim-web-devicons',
- 'nvim-tree/nvim-tree.lua',
- 'Raimondi/delimitMate',
- {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
- 'jlanzarotta/bufexplorer',
+  {
+    'folke/neodev.nvim',
+    config = true
+  },
+  ]]--
+  {
+    'neoclide/coc.nvim',  branch = 'release',
+    dependencies = {
+      coc_deps('neoclide/coc-css', "css"),
+      coc_deps('neoclide/coc-html', "html"),
+      coc_deps('neoclide/coc-json', "json"),
+      coc_deps('neoclide/coc-tsserver', "js"),
+      coc_deps('clangd/coc-clangd', "c++"),
+      coc_deps('fannheyward/coc-rust-analyzer', "rust"),
+      coc_deps('josa42/coc-lua', "lua"),
+    }
+  },
+  --]]--
+
+  'mattn/emmet-vim',
+  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim'},
+  'ap/vim-css-color',
+  'nvim-tree/nvim-web-devicons',
+  'nvim-tree/nvim-tree.lua',
+  'Raimondi/delimitMate',
+  {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  'jlanzarotta/bufexplorer',
 
 })
 
 require('onedark').setup()
 require('gitsigns').setup()
+--[[
+require('mason').setup()
+require('mason-lspconfig').setup()
+require('mason-lspconfig').setup_handlers({
+  function(server_name)
+    require("lspconfig")[server_name].setup({})
+  end
+})
+--]]
 require('lualine').setup({
   options = {
-    theme = 'onedark'
+    theme = 'onedark',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+  }
+})
+require("nvim-tree").setup({
+  view = {
+    side = "right"
   }
 })
 
@@ -119,14 +198,6 @@ autocmd BufReadPost *
 
 " Plugins
 " Plugins/NvimTree
-lua << EOF
-require("nvim-tree").setup({
-view = {
-  side = "right"
-  }
-})
-EOF
-
 map <C-n> :NvimTreeToggle<CR>
 " map <C-n> :NERDTreeToggle<CR>
 
@@ -134,18 +205,6 @@ map <C-n> :NvimTreeToggle<CR>
 set noshowmode
 set laststatus =2
 set display =lastline
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'subseparator': { 'left': '', 'right': '' },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-          \ 'cocstatus': 'coc#status'
-          \ },
-      \ }
 
 " Plugins/coc.vim
 inoremap <silent><expr> <TAB>
