@@ -1,3 +1,8 @@
+vim.g.mapleader = ' '
+
+local silentnoremap = { silent = true, noremap = true }
+vim.keymap.set('n', '<leader>c', ':nohl<cr>', silentnoremap)
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -11,119 +16,99 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local function coc_deps(repo, ft)
-  return {
-    repo,
-    build = 'yarn install --frozen-lockfile',
-    ft = ft,
-  }
-end
-
 require('lazy').setup({
   --'itchyny/lightline.vim',
-  'nvim-lualine/lualine.nvim',
-  'navarasu/onedark.nvim',
-
-  --[[
-  'neovim/nvim-lspconfig',
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
   {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
+    'nvim-lualine/lualine.nvim',
     opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-  },
-  {
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
-    },
-    opts = function()
-      local cmp = require('cmp')
-      return {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        })
+      options = {
+        theme = 'onedark',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
       }
-    end
-  },
-
-  {
-    'folke/neodev.nvim',
-    config = true
-  },
-  ]]--
-  {
-    'neoclide/coc.nvim',  branch = 'release',
-    dependencies = {
-      coc_deps('neoclide/coc-css', "css"),
-      coc_deps('neoclide/coc-html', "html"),
-      coc_deps('neoclide/coc-json', "json"),
-      coc_deps('neoclide/coc-tsserver', "js"),
-      coc_deps('clangd/coc-clangd', "c++"),
-      coc_deps('fannheyward/coc-rust-analyzer', "rust"),
-      coc_deps('josa42/coc-lua', "lua"),
     }
   },
-  --]]--
+  {'navarasu/onedark.nvim', config = true},
+
+  {
+  'VonHeikemen/lsp-zero.nvim',
+  branch = 'v1.x',
+  dependencies = {
+    -- LSP Support
+    {'neovim/nvim-lspconfig'},             -- Required
+    {'williamboman/mason.nvim'},           -- Optional
+    {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+    -- Autocompletion
+    {'hrsh7th/nvim-cmp'},         -- Required
+    {'hrsh7th/cmp-nvim-lsp'},     -- Required
+    {'hrsh7th/cmp-buffer'},       -- Optional
+    {'hrsh7th/cmp-path'},         -- Optional
+    {'saadparwaiz1/cmp_luasnip'}, -- Optional
+    {'hrsh7th/cmp-nvim-lua'},     -- Optional
+
+    -- Snippets
+    {'L3MON4D3/LuaSnip'},             -- Required
+    {'rafamadriz/friendly-snippets'}, -- Optional
+  }
+  },
+
+  {
+    'jay-babu/mason-null-ls.nvim',
+    dependencies = {
+      {'jose-elias-alvarez/null-ls.nvim', config = true},
+    'nvim-lua/plenary.nvim'
+    },
+    opts = {
+      automatic_setup = true
+    }
+  },
+
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = 'nvim-lua/plenary.nvim'
+  },
+
+  {
+    'folke/trouble.nvim',
+    opts = {}
+  },
 
   'mattn/emmet-vim',
-  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim'},
+  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = true},
   'ap/vim-css-color',
   'nvim-tree/nvim-web-devicons',
-  'nvim-tree/nvim-tree.lua',
+  {
+    'nvim-tree/nvim-tree.lua',
+    opts = {
+      view = {
+        side = "right"
+      }
+    }
+  },
   'Raimondi/delimitMate',
   {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   'jlanzarotta/bufexplorer',
 
 })
 
-require('onedark').setup()
-require('gitsigns').setup()
---[[
-require('mason').setup()
-require('mason-lspconfig').setup()
-require('mason-lspconfig').setup_handlers({
-  function(server_name)
-    require("lspconfig")[server_name].setup({})
-  end
+--require('onedark').setup()
+--require('gitsigns').setup()
+local lsp = require('lsp-zero').preset({
+  name = 'recommended',
 })
---]]
-require('lualine').setup({
-  options = {
-    theme = 'onedark',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-  }
-})
-require("nvim-tree").setup({
-  view = {
-    side = "right"
-  }
-})
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+lsp.setup()
+
+require('mason-null-ls').setup_handlers()
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 vim.cmd([[set nocompatible
 filetype plugin indent on
@@ -166,9 +151,6 @@ set splitright
 set hidden
 
 " Keymaps
-let mapleader = ' '
-
-nnoremap <silent> <leader>c :nohl<CR><C-l>
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -207,47 +189,47 @@ set laststatus =2
 set display =lastline
 
 " Plugins/coc.vim
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('definitionHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-nmap <silent> <leader>rn <Plug>(coc-rename)
-
-xmap <silent> <leader>f <Plug>(coc-format-selected)
-nmap <silent> <leader>f <Plug>(coc-format)
-
-xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
-nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
-
-nmap <silent> <leader>cl <Plug>(coc-codelens-action)
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" 
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" 
+" nnoremap <silent> K :call ShowDocumentation()<CR>
+" 
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1] =~# '\s'
+" endfunction
+" 
+" function! ShowDocumentation()
+"   if CocAction('hasProvider', 'hover')
+"     call CocActionAsync('definitionHover')
+"   else
+"     call feedkeys('K', 'in')
+"   endif
+" endfunction
+" 
+" " autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+" 
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" 
+" nmap <silent> <leader>rn <Plug>(coc-rename)
+" 
+" xmap <silent> <leader>f <Plug>(coc-format-selected)
+" nmap <silent> <leader>f <Plug>(coc-format)
+" 
+" xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+" nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
+" 
+" nmap <silent> <leader>cl <Plug>(coc-codelens-action)
 
 " Plugins/delimitMate
 let g:delimitMate_expand_cr = 1
