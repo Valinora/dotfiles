@@ -70,7 +70,7 @@ return {
   },
 
   'mattn/emmet-vim',
-  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = true},
+  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim', config = true},
   'ap/vim-css-color',
   'nvim-tree/nvim-web-devicons',
   {

@@ -27,5 +27,4 @@ lsp.setup()
 
 require('mason-null-ls').setup_handlers()
 
-require('mappings').setup()
-require('options').setup()
+require('config')
