@@ -27,11 +27,7 @@ lsp.setup()
 
 require('mason-null-ls').setup_handlers()
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+require('mappings').setup()
 
 vim.cmd([[set nocompatible
 filetype plugin indent on
@@ -73,13 +69,6 @@ set splitbelow
 set splitright
 set hidden
 
-" Keymaps
-
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
 " Files
 set autoread
 
@@ -103,7 +92,6 @@ autocmd BufReadPost *
 
 " Plugins
 " Plugins/NvimTree
-map <C-n> :NvimTreeToggle<CR>
 " map <C-n> :NERDTreeToggle<CR>
 
 " Plugins/Lightline
@@ -111,48 +99,6 @@ set noshowmode
 set laststatus =2
 set display =lastline
 
-" Plugins/coc.vim
-" inoremap <silent><expr> <TAB>
-"       \ coc#pum#visible() ? coc#pum#next(1) :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-" 
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" 
-" nnoremap <silent> K :call ShowDocumentation()<CR>
-" 
-" function! CheckBackspace() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1] =~# '\s'
-" endfunction
-" 
-" function! ShowDocumentation()
-"   if CocAction('hasProvider', 'hover')
-"     call CocActionAsync('definitionHover')
-"   else
-"     call feedkeys('K', 'in')
-"   endif
-" endfunction
-" 
-" " autocmd CursorHold * silent call CocActionAsync('highlight')
-" autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-" 
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-" 
-" nmap <silent> <leader>rn <Plug>(coc-rename)
-" 
-" xmap <silent> <leader>f <Plug>(coc-format-selected)
-" nmap <silent> <leader>f <Plug>(coc-format)
-" 
-" xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
-" nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
-" 
-" nmap <silent> <leader>cl <Plug>(coc-codelens-action)
 
 " Plugins/delimitMate
 let g:delimitMate_expand_cr = 1
@@ -160,9 +106,6 @@ let g:delimitMate_expand_space = 1
 
 " Plugins/NerdTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Searching
 set wrapscan
