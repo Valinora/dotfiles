@@ -9,17 +9,17 @@ M.setup = function()
   keymap('n', '<leader>fb', builtin.buffers, {})
   keymap('n', '<leader>fh', builtin.help_tags, {})
 
-  vim.cmd([[
-" Keymaps
+  -- Buffer Navigation
+  keymap('n', '<C-j>', '<C-W>j', {})
+  keymap('n', '<C-k>', '<C-W>k', {})
+  keymap('n', '<C-h>', '<C-W>h', {})
+  keymap('n', '<C-l>', '<C-W>l', {})
 
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+  -- NvimTree
+  keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true })
 
-"NvimTree
-map <silent> <C-n> :NvimTreeToggle<CR>
-
+  --[[
+TODO: Find the appropriate functions in nvim-cmp to map these to.
 " Plugins/coc.vim
 " inoremap <silent><expr> <TAB>
 "       \ coc#pum#visible() ? coc#pum#next(1) :
@@ -62,7 +62,7 @@ map <silent> <C-n> :NvimTreeToggle<CR>
 " nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
 " 
 " nmap <silent> <leader>cl <Plug>(coc-codelens-action)
-  ]])
+  --]]
 end
 
 return M
