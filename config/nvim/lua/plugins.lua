@@ -4,13 +4,17 @@ return {
     opts = {
       options = {
         theme = 'onedark',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
       }
     }
   },
   {'navarasu/onedark.nvim', config = true},
 
+  {
+    'folke/neodev.nvim',
+    config = true
+  },
+
+  -- TODO: Get rid of lsp-zero, do everything myself
   {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v1.x',
@@ -53,7 +57,7 @@ return {
 
   {
     'folke/trouble.nvim',
-    opts = {}
+    config = true
   },
 
   {
@@ -77,7 +81,5 @@ return {
       }
     }
   },
-  'Raimondi/delimitMate',
   {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-  'jlanzarotta/bufexplorer',
 }
