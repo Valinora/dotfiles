@@ -4,6 +4,7 @@ config/nvim/files/swap
 config/nvim/files/info
 config/nvim/plugged
 config/nvim/lazy-lock.json
+config/lvim/lazy-lock.json
 config/coc
 !config/coc/extensions/package.json
 zim/init.*
