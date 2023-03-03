@@ -1,4 +1,4 @@
-#! /usr/bin/zsh
+#! /usr/bin/sh
 
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"

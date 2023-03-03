@@ -9,7 +9,7 @@ zstyle ':zim:git' aliases-prefix 'g'
 zstyle ':zim:pacman' frontend 'pikaur'
 
 source ${ZIM_HOME}/init.zsh
-source ${HOME}/.zscripts/env.zsh
+source ${HOME}/.scripts/env.sh
 
 #antigen bundle git
 #antigen bundle sudo
