@@ -40,7 +40,7 @@ lvim.builtin.which_key.mappings["t"] = {
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "onedark"
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -107,6 +107,12 @@ lvim.plugins = {
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
+  },
+  {
+    'navarasu/onedark.nvim',
+    opts = {
+      style = 'darker'
+    }
   },
   {
     "tzachar/cmp-tabnine",
