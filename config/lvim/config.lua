@@ -5,6 +5,7 @@
 -- vim options
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.scrolloff = 10
 -- vim.opt.relativenumber = true
 
 -- general
@@ -38,6 +39,13 @@ lvim.builtin.which_key.mappings["t"] = {
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
 
+lvim.builtin.which_key.mappings["S"] = {
+  name = "Session",
+  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+}
+
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
 lvim.colorscheme = "onedark"
@@ -63,9 +71,6 @@ lvim.builtin.treesitter.auto_install = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -107,6 +112,14 @@ lvim.plugins = {
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+      options = { "buffers", "curdir", "tabpages", "winsize" },
+    }
   },
   {
     'navarasu/onedark.nvim',

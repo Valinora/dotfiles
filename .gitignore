@@ -3,6 +3,7 @@ config/nvim/files/backup/*
 config/nvim/files/swap
 config/nvim/files/info
 config/nvim/plugged
+config/nvim/session
 config/nvim/lazy-lock.json
 config/lvim/lazy-lock.json
 config/coc
