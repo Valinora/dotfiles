@@ -3,17 +3,17 @@
  `lvim` is the global options object
 ]]
 -- vim options
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.scrolloff = 10
 -- vim.opt.relativenumber = true
 
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
-  enabled = true,
-  pattern = { "*.lua", "*.rs" },
-  timeout = 1000,
+    enabled = true,
+    pattern = { "*.lua", "*.rs" },
+    timeout = 1000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -30,20 +30,20 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
-  name = "Diagnostics",
-  t = { "<cmd>TroubleToggle<cr>", "trouble" },
-  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
-  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+    name = "Diagnostics",
+    t = { "<cmd>TroubleToggle<cr>", "trouble" },
+    w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+    d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+    l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+    r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
 
 lvim.builtin.which_key.mappings["S"] = {
-  name = "Session",
-  c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
-  l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
-  Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
+    name = "Session",
+    c = { "<cmd>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+    Q = { "<cmd>lua require('persistence').stop()<cr>", "Quit without saving session" },
 }
 
 -- -- Change theme settings
@@ -109,35 +109,43 @@ lvim.builtin.treesitter.auto_install = true
 
 -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {
-      dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
-      options = { "buffers", "curdir", "tabpages", "winsize" },
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+    {
+        "folke/persistence.nvim",
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        opts = {
+            dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
+            options = { "buffers", "curdir", "tabpages", "winsize" },
+        }
+    },
+    {
+        'navarasu/onedark.nvim',
+        opts = {
+            style = 'darker'
+        }
+    },
+    {
+        "tzachar/cmp-tabnine",
+        build = "./install.sh",
+        dependencies = "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+    },
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "BufRead",
+        config = function() require "lsp_signature".on_attach() end,
+    },
+    {
+        "NvChad/nvim-colorizer.lua",
+        opts = {
+            css = true,
+        },
+        event = "BufRead"
     }
-  },
-  {
-    'navarasu/onedark.nvim',
-    opts = {
-      style = 'darker'
-    }
-  },
-  {
-    "tzachar/cmp-tabnine",
-    build = "./install.sh",
-    dependencies = "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require "lsp_signature".on_attach() end,
-  },
+
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
