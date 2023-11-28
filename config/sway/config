@@ -168,6 +168,9 @@ exec waybar
 # Notification Daemon
 exec dunst
 
+# Authentication Manager
+exec /usr/lib/polkit-kde-authentication-agent-1
+
 default_border pixel 3
 gaps inner 6
 gaps outer 0
