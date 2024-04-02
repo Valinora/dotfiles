@@ -9,6 +9,7 @@
     "config/waybar": "~/.config/waybar",
     "config/nvim": "~/.config/nvim",
     "config/lvim": "~/.config/lvim",
+    "config/fish": "~/.config/fish",
     "config/alacritty": "~/.config/alacritty",
     "config/user-dirs.dirs": "~/.config/user-dirs.dirs",
     "config/starship.toml": "~/.config/starship.toml"
