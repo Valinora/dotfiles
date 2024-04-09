@@ -8,9 +8,9 @@
 # Setup
 #
 
-set priv_command "sudo"
-set zpacman_frontend "pikaur"
-set zpacman_fronted_priv "$priv_command $zpacman_frontend"
+set -l priv_command "sudo"
+set -l zpacman_frontend "pikaur"
+set -l zpacman_frontend_priv "$priv_command $zpacman_frontend"
 
 #
 # General
