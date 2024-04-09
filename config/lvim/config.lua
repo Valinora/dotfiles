@@ -129,12 +129,6 @@ lvim.plugins = {
         }
     },
     {
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-        dependencies = "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-    },
-    {
         "ray-x/lsp_signature.nvim",
         event = "BufRead",
         config = function() require "lsp_signature".on_attach() end,
