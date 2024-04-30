@@ -168,8 +168,12 @@ exec waybar
 # Notification Daemon
 exec dunst
 
+# Wallpaper
+output "*" bg ~/usr/imgs/colorful_forest.jpg fill
+
 # Authentication Manager
 exec /usr/lib/polkit-kde-authentication-agent-1
+exec --no-startup-id /usr/lib/pam_kwallet_init
 
 default_border pixel 3
 gaps inner 6
