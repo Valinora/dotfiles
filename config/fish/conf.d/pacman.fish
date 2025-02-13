@@ -10,7 +10,7 @@
 
 set -l priv_command "sudo"
 set -l zpacman_frontend "pikaur"
-set -l zpacman_frontend_priv "$priv_command $zpacman_frontend"
+set -l zpacman_frontend_priv "$zpacman_frontend"
 
 #
 # General
