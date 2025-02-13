@@ -13,3 +13,11 @@ end
 # This section can be safely removed at any time if needed.
 test -r '/home/valinora/.opam/opam-init/init.fish' && source '/home/valinora/.opam/opam-init/init.fish' > /dev/null 2> /dev/null; or true
 # END opam configuration
+
+
+# Generate bun completions, if the file doesn't exist.
+if not test -e ~/.config/fish/completions/bun.fish;
+    if type -q 'bun';
+        bun completions
+    end
+end
