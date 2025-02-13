@@ -1,9 +1,6 @@
 {
   "link": {
-    "zshrc": "~/.zshrc",
     "scripts": "~/.scripts",
-    "zim": "~/.zim",
-    "zimrc": "~/.zimrc",
     "config/sway": "~/.config/sway",
     "config/coc": "~/.config/coc",
     "config/waybar": "~/.config/waybar",
